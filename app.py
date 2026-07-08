@@ -572,14 +572,14 @@ with col_side:
 
     <div class="mini-card">
       <div class="mini-title">Full Stack em Data & Analytics</div>
-      <div class="mini-sub">Nome da Instituição · Em andamento</div>
+      <div class="mini-sub">Pod Academy · Em andamento</div>
       <div class="mini-desc">Formação completa cobrindo engenharia de dados, analytics e IA.</div>
     </div>
 
     <div class="mini-card">
-      <div class="mini-title">Seu Curso de Graduação</div>
-      <div class="mini-sub">Universidade · Ano</div>
-      <div class="mini-desc">Descrição opcional.</div>
+      <div class="mini-title">Ciência de Dados</div>
+      <div class="mini-sub">Fatec · 2027</div>
+      <div class="mini-desc"></div>
     </div>
     """, unsafe_allow_html=True)
 
