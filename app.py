@@ -4,7 +4,7 @@ from pathlib import Path
 import streamlit as st
 
 st.set_page_config(
-    page_title="Gustavo Piccinini | Engenheiro de Dados",
+    page_title=" Gustavo Piccinini | Engenheiro de Dados",
     page_icon="◈",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -85,7 +85,7 @@ st.markdown("""
     font-family: 'DM Sans', sans-serif;
     font-size: 2.7rem;
     font-weight: 600;
-    color: #f0f2f8;
+    color: #6c74e8;
     line-height: 1.1;
     margin: 0 0 0.4rem 0;
   }
@@ -310,7 +310,7 @@ st.markdown(f"""
   <div class="hero-text">
     <div class="hero-eyebrow">◈ Engenharia de Dados</div>
     <div class="hero-name">Gustavo <span>Piccinini</span></div>
-    <div class="hero-role">Data Engineering · Analytics · Full Stack Data & Analytics · Ourinhos, SP</div>
+    <div class="hero-role">Engenheiro de Dados · Full Stack Data & Analytics PoD Academy · Ourinhos, SP</div>
     <div class="hero-links">
       <a class="hero-link" href="mailto:gusaugusto@outlook.com">✉ gusaugusto@outlook.com</a>
       <a class="hero-link" href="tel:+5514998207736">☎ (14) 99820-7736</a>
@@ -330,7 +330,7 @@ st.markdown("""
   </div>
   <div class="kpi-card">
     <div class="kpi-value">3</div>
-    <div class="kpi-label">Domínios: eng · analytics · cloud</div>
+    <div class="kpi-label">Domínios: Engenharia de Dados · AWS · OCI · GCP · Spark · PySpark·</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -348,12 +348,10 @@ with col_main:
       <div class="sec-line"></div>
     </div>
     <div class="about-box">
-      Profissional de dados em formação Full Stack, com atuação prática em Engenharia,
-      de Dados. Atualmente desenvolvo e mantenho um dashboard de gestão
-      de assistência social (CadÚnico/Bolsa Família) usando DuckDB, Pandas e Streamlit.
-      Tenho vivência com arquitetura medalhão (Bronze, Silver, Gold) em PySpark e Airflow,
-      Data Lakes na AWS, GCP e OCI, e SQL avançado. Venho da área financeira, o que me dá
-      visão de negócio aplicada à resolução de problemas como inadimplência e risco de crédito.
+      Profissional de dados em formação Full Stack em Dados e Analytics, com atuação prática em Engenharia,
+      de Dados. Tenho vivência com arquitetura medalhão (Bronze, Silver, Gold) em PySpark e Airflow,Data Lakes na AWS, GCP e OCI, e SQL avançado.
+      Atualmente desenvolvo e mantenho um dashboard de gestão no setor assistência social (CadÚnico/Bolsa Família) usando DuckDB, Pandas e Streamlit.
+      Atuando na área financeira, possuo uma visão de negócio aplicada à resolução de problemas como inadimplência e risco de crédito.
     </div>
     """, unsafe_allow_html=True)
 
@@ -367,7 +365,7 @@ with col_main:
     <div class="tl-card">
       <div class="tl-top">
         <div class="tl-title">Data Lake PoD Cartões</div>
-        <div class="tl-period">Portfólio</div>
+        <div class="tl-period">2026</div>
       </div>
       <div class="tl-company">github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes</div>
       <div class="tl-desc">
@@ -382,11 +380,29 @@ with col_main:
         <span class="badge b-amber">Streamlit</span>
       </div>
     </div>
+    
+    <div class="tl-card">
+      <div class="tl-top">
+        <div class="tl-title">Pivotando o Desktop 4C Digital</div>
+        <div class="tl-period">2026</div>
+      </div>
+      <div class="tl-company">Fintech de cobrança digital</div>
+      <div class="tl-desc">
+        Pipeline de dados de um DataLake com arquitetura medalhão (Bronze/Silver/Gold) em PySpark e
+        Airflow, substituindo processo manual em Excel/VBA.
+      </div>
+      <div class="badge-row">
+        <span class="badge b-violet">PySpark</span>
+        <span class="badge b-green">Airflow</span>
+        <span class="badge b-sky">Spark SQL</span>
+        <span class="badge b-pink">Arquitetura Medalhão</span>
+      </div>
+    </div>            
 
     <div class="tl-card">
       <div class="tl-top">
         <div class="tl-title">Dashboard de Atendimentos — Assistência Social</div>
-        <div class="tl-period">2024 – Atual</div>
+        <div class="tl-period">2026 – Atual</div>
       </div>
       <div class="tl-company">Prefeitura de Jacarezinho · uso interno</div>
       <div class="tl-desc">
@@ -398,25 +414,6 @@ with col_main:
         <span class="badge b-violet">Pandas</span>
         <span class="badge b-amber">Streamlit</span>
         <span class="badge b-pink">Dados Públicos</span>
-      </div>
-    </div>
-
-    <div class="tl-card">
-      <div class="tl-top">
-        <div class="tl-title">Pivotando o Desktop 4C Digital</div>
-        <div class="tl-period">Hackathon</div>
-      </div>
-      <div class="tl-company">Setor de cobrança digital</div>
-      <div class="tl-desc">
-        Pipeline de dados de um DataLake com arquitetura medalhão (Bronze/Silver/Gold) em PySpark e
-        Airflow, substituindo processo manual em Excel/VBA. Refatoração de PySpark
-        DataFrame API para Spark SQL puro, estruturado em três CTEs (limpa, regras, seleção final).
-      </div>
-      <div class="badge-row">
-        <span class="badge b-violet">PySpark</span>
-        <span class="badge b-green">Airflow</span>
-        <span class="badge b-sky">Spark SQL</span>
-        <span class="badge b-pink">Arquitetura Medalhão</span>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -482,21 +479,21 @@ with col_side:
     </div>
     """, unsafe_allow_html=True)
 
-    # EXPERIÊNCIA
+    # EXPERIÊNCIAS
     st.markdown("""
     <div class="sec-header">
-      <span class="sec-mono">experience</span>
+      <span class="sec-mono">Experiências</span>
       <div class="sec-line"></div>
     </div>
     
     <div class="tl-card">
       <div class="tl-top">
-        <div class="tl-title">Liderança na equipe de Engenharia de Dados</div>
+        <div class="tl-title">Hackathon PoD Academy - Claro</div>
         <div class="tl-period">2026</div>
       </div>
-      <div class="tl-company">Projeto Telecom (Claro)</div>
+      <div class="tl-company">Lider da equipe de Engenharia de Dados</div>
       <div class="tl-desc">
-        Liderança da equipe na criação do Data Lake. Pipelines ETL com PySpark
+        Liderança da equipe de engenharia de dados responsavel pela criação do Data Lake,Pipelines e ETL com PySpark para 
         processando milhões de linhas em OCI (~1h30 de execução, custo de ~R$ 100/mês).
       </div>
       <div class="badge-row">
@@ -529,7 +526,7 @@ with col_side:
       <div class="tl-company">Prefeitura de Jacarezinho — Assistência Social</div>
       <div class="tl-desc">
         Desenvolvimento e manutenção de dashboard para gestão de atendimentos,
-        integrando CadÚnico e Bolsa Família(dados do Governo Federal). Pipeline com DuckDB e Pandas, focando na monitoria, integridade e linhagem.
+        integrando CadÚnico e Bolsa Família(dados do Governo Federal). Pipeline com DuckDB e Pandas, focando na monitoria, integridade e linhagem dos dados.
         Visualizações interativas com Plotly.
       </div>
       <div class="badge-row">
