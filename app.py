@@ -1,11 +1,28 @@
+import base64
+from pathlib import Path
+
 import streamlit as st
 
 st.set_page_config(
-    page_title="Gustavo | Full Stack Data & Analytics",
+    page_title="Gustavo Piccinini | Engenheiro de Dados",
     page_icon="◈",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+
+# ── FOTO (base64, com fallback para avatar de iniciais) ─────────────────────
+ASSETS_DIR = Path(__file__).parent / "assets"
+PHOTO_PATH = ASSETS_DIR / "foto.jpg"  # coloque sua foto aqui (jpg ou png)
+
+
+def get_avatar_html() -> str:
+    if PHOTO_PATH.exists():
+        ext = PHOTO_PATH.suffix.lstrip(".")
+        b64 = base64.b64encode(PHOTO_PATH.read_bytes()).decode()
+        return f'<img class="avatar-img" src="data:image/{ext};base64,{b64}" alt="Gustavo Piccinini" />'
+    # fallback: avatar com iniciais, caso a foto ainda não tenha sido adicionada
+    return '<div class="avatar-fallback">GP</div>'
+
 
 st.markdown("""
 <style>
@@ -25,10 +42,37 @@ st.markdown("""
 
   /* ── HERO ── */
   .hero {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
     padding: 2.8rem 0 2rem 0;
     border-bottom: 1px solid #1e2130;
     margin-bottom: 2.5rem;
   }
+  .avatar-img {
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #6c74e8;
+    flex-shrink: 0;
+  }
+  .avatar-fallback {
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    border: 2px solid #6c74e8;
+    background: #16191f;
+    color: #6c74e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .hero-text { flex: 1; }
   .hero-eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 0.72rem;
@@ -39,15 +83,13 @@ st.markdown("""
   }
   .hero-name {
     font-family: 'DM Sans', sans-serif;
-    font-size: 3rem;
+    font-size: 2.7rem;
     font-weight: 600;
     color: #f0f2f8;
     line-height: 1.1;
     margin: 0 0 0.4rem 0;
   }
-  .hero-name span {
-    color: #6c74e8;
-  }
+  .hero-name span { color: #6c74e8; }
   .hero-role {
     font-family: 'DM Sans', sans-serif;
     font-size: 1.05rem;
@@ -262,15 +304,19 @@ st.markdown("""
 
 
 # ── HERO ────────────────────────────────────────────────────────────────────
-st.markdown("""
+st.markdown(f"""
 <div class="hero">
-  <div class="hero-eyebrow">◈ Full Stack Data & Analytics</div>
-  <div class="hero-name">Gustavo <span>[Sobrenome]</span></div>
-  <div class="hero-role">Data Engineering · Analytics · AI Solutions · São Paulo, BR</div>
-  <div class="hero-links">
-    <a class="hero-link" href="mailto:seuemail@email.com">✉ seuemail@email.com</a>
-    <a class="hero-link" href="https://linkedin.com/in/seu-perfil" target="_blank">↗ linkedin.com/in/seu-perfil</a>
-    <a class="hero-link" href="https://github.com/seu-usuario" target="_blank">⌥ github.com/seu-usuario</a>
+  {get_avatar_html()}
+  <div class="hero-text">
+    <div class="hero-eyebrow">◈ Engenharia de Dados</div>
+    <div class="hero-name">Gustavo <span>Piccinini</span></div>
+    <div class="hero-role">Data Engineering · Analytics · Full Stack Data & Analytics · Ourinhos, SP</div>
+    <div class="hero-links">
+      <a class="hero-link" href="mailto:gusaugusto@outlook.com">✉ gusaugusto@outlook.com</a>
+      <a class="hero-link" href="tel:+5514998207736">☎ (14) 99820-7736</a>
+      <a class="hero-link" href="https://www.linkedin.com/in/gustavoapiccinini" target="_blank">↗ linkedin.com/in/gustavoapiccinini</a>
+      <a class="hero-link" href="https://github.com/GustavoPiccinini" target="_blank">⌥ github.com/GustavoPiccinini</a>
+    </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -280,27 +326,26 @@ st.markdown("""
 st.markdown("""
 <div class="kpi-row">
   <div class="kpi-card">
-    <div class="kpi-value">X+</div>
-    <div class="kpi-label">Anos de experiência</div>
+    <div class="kpi-value">2+</div>
+    <div class="kpi-label">Anos em projetos de dados</div>
   </div>
   <div class="kpi-card">
     <div class="kpi-value">60M+</div>
     <div class="kpi-label">Registros em produção</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-value">N</div>
-    <div class="kpi-label">Pipelines entregues</div>
+    <div class="kpi-value">4</div>
+    <div class="kpi-label">Pipelines / projetos entregues</div>
   </div>
   <div class="kpi-card">
     <div class="kpi-value">3</div>
-    <div class="kpi-label">Domínios: eng · analytics · AI</div>
+    <div class="kpi-label">Domínios: eng · analytics · cloud</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
 
 
-
-    # ── LAYOUT PRINCIPAL ────────────────────────────────────────────────────────
+# ── LAYOUT PRINCIPAL ─────────────────────────────────────────────────────────
 col_main, col_side = st.columns([3, 2], gap="large")
 
 with col_main:
@@ -311,18 +356,17 @@ with col_main:
       <span class="sec-mono">about</span>
       <div class="sec-line"></div>
     </div>
-
     <div class="about-box">
-      Estudante de Ciência de Dados e Engenharia de Dados, graduado em Administração.
-      Desenvolvo projetos completos envolvendo Engenharia de Dados, utilizando Python,
-      SQL, PySpark, Apache Airflow, PostgreSQL, Docker e Streamlit. Possuo experiência prática com arquiteturas
-      Data Lake (Bronze, Silver e Gold), Data Warehouse, processamento distribuído e soluções em AWS, Google Cloud
-      Platform (GCP) e Oracle Cloud Infrastructure (OCI).
+      Profissional de dados em formação Full Stack, com atuação prática em Engenharia,
+      Análise e Ciência de Dados. Atualmente desenvolvo e mantenho um dashboard de gestão
+      de assistência social (CadÚnico/Bolsa Família) usando DuckDB, Pandas e Streamlit.
+      Tenho vivência com arquitetura medalhão (Bronze, Silver, Gold) em PySpark e Airflow,
+      Data Lakes na AWS, GCP e OCI, e SQL avançado. Venho da área financeira, o que me dá
+      visão de negócio aplicada à resolução de problemas como inadimplência e risco de crédito.
     </div>
     """, unsafe_allow_html=True)
 
-
-# PROJETOS
+    # PROJETOS
     st.markdown("""
     <div class="sec-header">
       <span class="sec-mono">projects</span>
@@ -331,20 +375,39 @@ with col_main:
 
     <div class="tl-card">
       <div class="tl-top">
-        <div class="tl-title">Rust + PySpark LGPD Anonymizer</div>
-        <div class="tl-period">Open Source</div>
+        <div class="tl-title">Data Lake PoD Cartões</div>
+        <div class="tl-period">Portfólio</div>
       </div>
-      <div class="tl-company">github.com/seu-usuario/lgpd-anonymizer</div>
+      <div class="tl-company">github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes</div>
       <div class="tl-desc">
-        Binário Rust integrado a pipeline PySpark/Airflow para anonimização de dados sensíveis
-        conforme LGPD — hashing de CPF e mascaramento de nomes com performance nativa.
-        MVP completo empacotado para deploy no GCP.
+        Data Lake completo na AWS (Raw, Trusted, Refined). Processamento com PySpark, Parquet particionado no S3 e Book de
+        Variáveis (U1M/U3M/U6M/U12M) para análise de inadimplência. Dashboard em Streamlit
+        com DuckDB como engine de consulta.
       </div>
       <div class="badge-row">
-        <span class="badge b-amber">Rust</span>
         <span class="badge b-violet">PySpark</span>
-        <span class="badge b-green">LGPD</span>
-        <span class="badge b-pink">Privacy Engineering</span>
+        <span class="badge b-green">AWS S3</span>
+        <span class="badge b-sky">DuckDB</span>
+        <span class="badge b-amber">Streamlit</span>
+      </div>
+    </div>
+
+    <div class="tl-card">
+      <div class="tl-top">
+        <div class="tl-title">Dashboard de Atendimentos — Assistência Social</div>
+        <div class="tl-period">2024 – Atual</div>
+      </div>
+      <div class="tl-company">Prefeitura de Jacarezinho · uso interno</div>
+      <div class="tl-desc">
+        Dashboard em Streamlit integrando dados do CadÚnico e Bolsa Família a partir de
+        exportações do CECAD 2.0. Deduplicação entre competências mensais com window
+        functions (ROW_NUMBER()), análise de faixa de renda e visão agregada "Todos os meses".
+      </div>
+      <div class="badge-row">
+        <span class="badge b-sky">DuckDB</span>
+        <span class="badge b-violet">Pandas</span>
+        <span class="badge b-amber">Streamlit</span>
+        <span class="badge b-pink">Dados Públicos</span>
       </div>
     </div>
 
@@ -353,21 +416,20 @@ with col_main:
         <div class="tl-title">AI Credit & Collections Platform</div>
         <div class="tl-period">Hackathon</div>
       </div>
-      <div class="tl-company">Setor de crédito e cobrança digital · 60M+ registros</div>
+      <div class="tl-company">Setor de crédito e cobrança digital</div>
       <div class="tl-desc">
-        Arquitetura de solução de IA end-to-end: credit scoring, agente LLM para
-        negociação inteligente de dívidas e detecção de fraude. Pipeline de dados
-        modernizado para suportar serviços de IA em produção.
+        Pipeline de dados com arquitetura medalhão (Bronze/Silver/Gold) em PySpark e
+        Airflow, substituindo processo manual em Excel/VBA. Refatoração de PySpark
+        DataFrame API para Spark SQL puro, estruturado em três CTEs (limpa, regras, seleção final).
       </div>
       <div class="badge-row">
-        <span class="badge b-pink">LLM</span>
-        <span class="badge b-violet">ML</span>
-        <span class="badge b-green">Fraud Detection</span>
-        <span class="badge b-sky">Credit Scoring</span>
+        <span class="badge b-violet">PySpark</span>
+        <span class="badge b-green">Airflow</span>
+        <span class="badge b-sky">Spark SQL</span>
+        <span class="badge b-pink">Arquitetura Medalhão</span>
       </div>
     </div>
     """, unsafe_allow_html=True)
-
 
 with col_side:
 
@@ -383,35 +445,24 @@ with col_side:
         <div class="badge-row">
           <span class="badge b-violet">PySpark</span>
           <span class="badge b-violet">Airflow</span>
-          <span class="badge b-violet">dbt</span>
-          <span class="badge b-violet">Kafka</span>
+          <span class="badge b-violet">ETL/ELT</span>
         </div>
       </div>
       <div class="skill-card">
         <div class="skill-cat">Cloud & Infra</div>
         <div class="badge-row">
+          <span class="badge b-green">AWS</span>
           <span class="badge b-green">GCP</span>
-          <span class="badge b-green">BigQuery</span>
-          <span class="badge b-green">Docker</span>
-          <span class="badge b-green">Terraform</span>
+          <span class="badge b-green">OCI</span>
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-cat">Analytics</div>
+        <div class="skill-cat">Data & Analytics</div>
         <div class="badge-row">
           <span class="badge b-sky">SQL</span>
-          <span class="badge b-sky">Power BI</span>
-          <span class="badge b-sky">Looker</span>
+          <span class="badge b-sky">DuckDB</span>
           <span class="badge b-sky">Streamlit</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">AI & ML</div>
-        <div class="badge-row">
-          <span class="badge b-pink">LLM</span>
-          <span class="badge b-pink">MLflow</span>
-          <span class="badge b-pink">Scikit-learn</span>
-          <span class="badge b-pink">LangChain</span>
+          <span class="badge b-sky">Plotly</span>
         </div>
       </div>
       <div class="skill-card">
@@ -419,24 +470,29 @@ with col_side:
         <div class="badge-row">
           <span class="badge b-amber">Python</span>
           <span class="badge b-amber">SQL</span>
-          <span class="badge b-amber">Rust</span>
-          <span class="badge b-amber">Bash</span>
+          <span class="badge b-amber">Rust (em estudo)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Dev Tools</div>
+        <div class="badge-row">
+          <span class="badge b-pink">VS Code</span>
+          <span class="badge b-pink">uv</span>
+          <span class="badge b-pink">Git / GitHub</span>
         </div>
       </div>
       <div class="skill-card">
         <div class="skill-cat">Practices</div>
         <div class="badge-row">
-          <span class="badge b-sky">CI/CD</span>
-          <span class="badge b-sky">DataOps</span>
           <span class="badge b-sky">LGPD</span>
-          <span class="badge b-sky">Agile</span>
+          <span class="badge b-sky">Data Lake</span>
+          <span class="badge b-sky">Modelagem Dimensional</span>
         </div>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
     # EXPERIÊNCIA
-
     st.markdown("""
     <div class="sec-header">
       <span class="sec-mono">experience</span>
@@ -444,125 +500,72 @@ with col_side:
     </div>
 
     <div class="tl-card">
-
       <div class="tl-top">
-        <div class="tl-title">
-            Engenheiro de Dados (Projeto Acadêmico)
-        </div>
-
-        <div class="tl-period">
-            2025 – Atual
-        </div>
-
+        <div class="tl-title">Analista/Desenvolvedor de Dados</div>
+        <div class="tl-period">2024 – Atual</div>
       </div>
-
-      <div class="tl-company">
-          PoD Academy
-      </div>
-
+      <div class="tl-company">Prefeitura de Jacarezinho — Assistência Social</div>
       <div class="tl-desc">
-
-        Participação no Hackathon Oracle promovido pela PoD Academy, com foco no desenvolvimento de soluções de Engenharia de Dados para análise de crédito. 
-        Desenvolvimento de pipelines ETL utilizando Python e PySpark para processamento distribuído de grandes volumes de dados, aplicando arquitetura Data Lake (Bronze, Silver e Gold), modelagem analítica e construção de Book de Variáveis para identificação de clientes adimplentes e inadimplentes. 
-        Experiência prática com Oracle Cloud Infrastructure (OCI), utilizando Data Flow, Object Storage e integração entre serviços para processamento e armazenamento de dados em ambiente de nuvem.
-
-
+        Desenvolvimento e manutenção de dashboard para gestão de atendimentos,
+        integrando CadÚnico e Bolsa Família. Pipeline com DuckDB e Pandas, deduplicação
+        entre competências mensais e visualizações interativas com Plotly.
       </div>
-
       <div class="badge-row">
-
         <span class="badge b-violet">Python</span>
+        <span class="badge b-sky">DuckDB</span>
+        <span class="badge b-green">Streamlit</span>
+      </div>
+    </div>
+
+    <div class="tl-card">
+      <div class="tl-top">
+        <div class="tl-title">Engenheiro de Dados — Hackathon</div>
+        <div class="tl-period">2025</div>
+      </div>
+      <div class="tl-company">Empresa de Crédito e Cobrança</div>
+      <div class="tl-desc">
+        Pipeline com arquitetura medalhão (Bronze/Silver/Gold) usando PySpark e Airflow,
+        substituindo processo manual em Excel/VBA. Orquestração de DAGs de ponta a ponta.
+      </div>
+      <div class="badge-row">
         <span class="badge b-violet">PySpark</span>
-        <span class="badge b-sky">SQL</span>
-        <span class="badge b-green">OCI</span>
         <span class="badge b-amber">Airflow</span>
-        <span class="badge b-sky">Docker</span>
-
       </div>
-
     </div>
 
-
     <div class="tl-card">
-
       <div class="tl-top">
-
-        <div class="tl-title">
-            Participante – Hackathon Engenharia de Dados
-        </div>
-
-        <div class="tl-period">
-            2026
-        </div>
-
+        <div class="tl-title">Liderança em Engenharia de Dados</div>
+        <div class="tl-period">2024</div>
       </div>
-
-      <div class="tl-company">
-          4C Soluções Inteligentes
-      </div>
-
+      <div class="tl-company">Projeto Telecom (Claro)</div>
       <div class="tl-desc">
-
-        Desenvolvimento colaborativo de soluções de Engenharia de Dados para automação de processos,
-        arquitetura de dados e integração de informações utilizando metodologia Scrum,
-        com foco em escalabilidade e boas práticas de desenvolvimento.
-
+        Liderança da equipe na criação do Data Lake. Pipelines ETL com PySpark
+        processando milhões de linhas em OCI (~1h30 de execução, custo de ~R$ 1.000/mês).
       </div>
-
       <div class="badge-row">
-
-        <span class="badge b-violet">Python</span>
-        <span class="badge b-green">Data Lake</span>
-        <span class="badge b-amber">Scrum</span>
-        <span class="badge b-sky">ETL</span>
-        <span class="badge b-violet">Arquitetura de Dados</span>
-
+        <span class="badge b-violet">PySpark</span>
+        <span class="badge b-green">OCI</span>
       </div>
-
     </div>
 
-
-
     <div class="tl-card">
-
       <div class="tl-top">
-
-        <div class="tl-title">
-            Administrador
-        </div>
-
-        <div class="tl-period">
-            2010 – 2025
-        </div>
-
+        <div class="tl-title">Administrador e Gestor Financeiro</div>
+        <div class="tl-period">2015 – 2020</div>
       </div>
-
-      <div class="tl-company">
-          Empresa Familiar
-      </div>
-
+      <div class="tl-company">Piccinini Saúde Ocupacional</div>
       <div class="tl-desc">
-
-       Responsável pela gestão administrativa e financeira da empresa, acompanhando indicadores de desempenho e apoiando a tomada de decisão baseada em dados. 
-       Desenvolvimento de automações para otimização de processos utilizando Excel, VBA e Power BI, reduzindo atividades manuais
-       padronizando controles e aumentando a eficiência operacional por meio da análise e visualização de dados.
-
+        Gestão financeira e desenvolvimento de dashboards e automações para controle
+        de custos e relatórios gerenciais.
       </div>
-
       <div class="badge-row">
-
-        <span class="badge b-violet">Excel</span>
-        <span class="badge b-sky">VBA</span>
-        <span class="badge b-green">Power BI</span>
+        <span class="badge b-sky">Excel</span>
         <span class="badge b-amber">Gestão</span>
-
       </div>
-
     </div>
-
     """, unsafe_allow_html=True)
 
-    
     # EDUCAÇÃO
     st.markdown("""
     <div class="sec-header">
@@ -571,14 +574,20 @@ with col_side:
     </div>
 
     <div class="mini-card">
-      <div class="mini-title">Full Stack em Data & Analytics</div>
-      <div class="mini-sub">Pod Academy · Em andamento</div>
+      <div class="mini-title">Full Stack em Dados e Analytics</div>
+      <div class="mini-sub">PoD Academy · 2026</div>
       <div class="mini-desc">Formação completa cobrindo engenharia de dados, analytics e IA.</div>
     </div>
 
     <div class="mini-card">
       <div class="mini-title">Ciência de Dados</div>
-      <div class="mini-sub">Fatec · 2027</div>
+      <div class="mini-sub">FATEC Ourinhos · em andamento, previsão 2027</div>
+      <div class="mini-desc"></div>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-title">Administração</div>
+      <div class="mini-sub">UNICENTRO · 2006</div>
       <div class="mini-desc"></div>
     </div>
     """, unsafe_allow_html=True)
@@ -592,7 +601,7 @@ with col_side:
     <div class="mini-card">
       <div class="badge-row">
         <span class="badge b-green">🇧🇷 Português — Nativo</span>
-        <span class="badge b-sky">🇺🇸 Inglês — [Nível]</span>
+        <span class="badge b-sky">🇺🇸 Inglês — Fluente</span>
       </div>
     </div>
     """, unsafe_allow_html=True)
