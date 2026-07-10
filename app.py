@@ -556,7 +556,7 @@ with col_side:
     # EDUCAÇÃO
     st.markdown("""
     <div class="sec-header">
-      <span class="sec-mono">education</span>
+      <span class="sec-mono">Formações</span>
       <div class="sec-line"></div>
     </div>
 
@@ -582,7 +582,7 @@ with col_side:
     # IDIOMAS
     st.markdown("""
     <div class="sec-header">
-      <span class="sec-mono">languages</span>
+      <span class="sec-mono">Idiomas</span>
       <div class="sec-line"></div>
     </div>
     <div class="mini-card">
