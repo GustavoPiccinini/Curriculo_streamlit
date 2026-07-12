@@ -12,8 +12,7 @@ st.set_page_config(
 
 # ── FOTO (base64, com fallback para avatar de iniciais) ─────────────────────
 ASSETS_DIR = Path(__file__).parent / "assets"
-PHOTO_PATH = ASSETS_DIR / "foto.jpg"
-RESUME_PDF_PATH = ASSETS_DIR / "Gustavo_Piccinini_CV.pdf"
+PHOTO_PATH = ASSETS_DIR / "foto.jpg"  
 
 
 def get_avatar_html() -> str:
@@ -86,7 +85,7 @@ st.markdown("""
     font-family: 'DM Sans', sans-serif;
     font-size: 2.7rem;
     font-weight: 600;
-    color: #f0f2f8;
+    color: #6c74e8;
     line-height: 1.1;
     margin: 0 0 0.4rem 0;
   }
@@ -297,43 +296,6 @@ st.markdown("""
     color: #8a91a8;
   }
 
-  /* ── DOWNLOAD CV BUTTON ── */
-  div[data-testid="stDownloadButton"] {
-    margin: 0.4rem 0 0.4rem 0;
-  }
-  div[data-testid="stDownloadButton"] button {
-    font-family: 'DM Mono', monospace !important;
-    font-size: 0.8rem !important;
-    color: #f0f2f8 !important;
-    background: linear-gradient(90deg, #6c74e8, #4ade80) !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 0.55rem 1.3rem !important;
-    font-weight: 500 !important;
-    transition: opacity 0.2s !important;
-  }
-  div[data-testid="stDownloadButton"] button:hover {
-    opacity: 0.85;
-    color: #f0f2f8 !important;
-  }
-
-  /* ── PROJECT REPO LINK ── */
-  .tl-link {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: #6c74e8;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    margin-top: 0.65rem;
-    padding-top: 0.65rem;
-    border-top: 1px solid #1e2130;
-    width: 100%;
-    transition: color 0.2s;
-  }
-  .tl-link:hover { color: #4ade80; }
-
   /* hide streamlit chrome */
   #MainMenu, footer, header { visibility: hidden; }
   .stDeployButton { display: none; }
@@ -359,19 +321,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-if RESUME_PDF_PATH.exists():
-    with open(RESUME_PDF_PATH, "rb") as f:
-        st.download_button(
-            label="⬇  Baixar currículo em PDF",
-            data=f,
-            file_name="Gustavo_Piccinini_Curriculo.pdf",
-            mime="application/pdf",
-        )
-
 
 # ── KPI CARDS ───────────────────────────────────────────────────────────────
 st.markdown("""
-<div class="kpi-row" style="grid-template-columns: repeat(2, 1fr);">
   <div class="kpi-card">
     <div class="kpi-value">4</div>
     <div class="kpi-label">Projetos</div>
@@ -415,7 +367,7 @@ with col_main:
         <div class="tl-title">Data Lake PoD Cartões</div>
         <div class="tl-period">2026</div>
       </div>
-      <div class="tl-company">Portfólio pessoal</div>
+      <div class="tl-company">github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes</div>
       <div class="tl-desc">
         Data Lake completo na AWS (Raw, Trusted, Refined). Processamento com PySpark, Parquet particionado no S3 e Book de
         Variáveis (U1M/U3M/U6M/U12M) para análise de inadimplência. Dashboard em Streamlit
@@ -427,7 +379,6 @@ with col_main:
         <span class="badge b-sky">DuckDB</span>
         <span class="badge b-amber">Streamlit</span>
       </div>
-      <a class="tl-link" href="https://github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes" target="_blank">⌥ github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes ↗</a>
     </div>
     
     <div class="tl-card">
@@ -438,7 +389,7 @@ with col_main:
       <div class="tl-company">Fintech de cobrança digital</div>
       <div class="tl-desc">
         Pipeline de dados de um DataLake com arquitetura medalhão (Bronze/Silver/Gold) em PySpark e
-        Airflow, substituindo processo manual em Excel/VBA.
+        Airflow, substituindo processo manual antigo em Excel/VBA.
       </div>
       <div class="badge-row">
         <span class="badge b-violet">PySpark</span>
@@ -624,18 +575,6 @@ with col_side:
     <div class="mini-card">
       <div class="mini-title">Administração</div>
       <div class="mini-sub">UNICENTRO · 2006</div>
-      <div class="mini-desc"></div>
-    </div>
-
-    <div class="mini-card">
-      <div class="mini-title">Técnico em Edificações</div>
-      <div class="mini-sub">ETEC Ourinhos · 2020</div>
-      <div class="mini-desc"></div>
-    </div>
-
-    <div class="mini-card">
-      <div class="mini-title">Engenharia Civil</div>
-      <div class="mini-sub">Estácio de Sá Ourinhos · 2018</div>
       <div class="mini-desc"></div>
     </div>
     """, unsafe_allow_html=True)
