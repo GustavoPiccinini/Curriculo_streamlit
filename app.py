@@ -44,7 +44,7 @@ PROJECTS = [
             "agregadas por usuário nas janelas U1M/U3M/U6M."
         ),
         "stack": [("b-violet", "PySpark"), ("b-green", "Airflow"), ("b-sky", "AWS EMR"), ("b-amber", "S3")],
-        "link": None,  # <- troque por "https://github.com/SEU_USUARIO/SEU_REPO" depois de subir no GitHub
+        "link": None,  "https://github.com/GustavoPiccinini/Data_Lake-E_Comerce"
     },
     {
         "title": "Pivotando o Desktop 4C Digital",
