@@ -13,7 +13,82 @@ st.set_page_config(
 # ── FOTO (base64, com fallback para avatar de iniciais) ─────────────────────
 ASSETS_DIR = Path(__file__).parent / "assets"
 PHOTO_PATH = ASSETS_DIR / "foto.jpg"
-RESUME_PDF_PATH = ASSETS_DIR / "Gustavo_Piccinini_CV.pdf"
+RESUME_PDF_PATH = ASSETS_DIR / "Gustavo_Piccinini_Curriculo.pdf"
+
+
+# ── PROJETOS ──────────────────────────────────────────────────────────────
+# Para adicionar um projeto novo: copie um dicionário abaixo, ajuste os campos
+# e cole no final da lista. "link" é opcional — se o repositório for privado
+# ou não existir, é só remover a chave (ou deixar None) que o botão some sozinho.
+PROJECTS = [
+    {
+        "title": "Data Lake PoD Cartões",
+        "period": "2026",
+        "context": "Projeto PoD Academy",
+        "description": (
+            "Data Lake completo na AWS (Raw, Trusted, Refined). Processamento com PySpark, "
+            "Parquet particionado no S3 e Book de Variáveis (U1M/U3M/U6M/U12M) "
+            "de inadimplência. Dashboard em Streamlit com DuckDB como engine de consulta."
+        ),
+        "stack": [("b-violet", "PySpark"), ("b-green", "AWS S3"), ("b-sky", "DuckDB"), ("b-amber", "Streamlit")],
+        "link": "https://github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes",
+    },
+    {
+        "title": "Data Lake E-commerce",
+        "period": "2026",
+        "context": "Projeto PoD Academy",
+        "description": (
+            "Data Lake na AWS para usuários/produtos/vendas com arquitetura em medalhão "
+            "(ingestion, raw, curated, controle). Ingestão Postgres → S3, processamento "
+            "em PySpark orquestrado por Airflow/EMR e Book de Variáveis "
+            "agregadas por usuário nas janelas U1M/U3M/U6M."
+        ),
+        "stack": [("b-violet", "PySpark"), ("b-green", "Airflow"), ("b-sky", "AWS EMR"), ("b-amber", "S3")],
+        "link": None,  # <- troque por "https://github.com/SEU_USUARIO/SEU_REPO" depois de subir no GitHub
+    },
+    {
+        "title": "Pivotando o Desktop 4C Digital",
+        "period": "2026",
+        "context": "Fintech de cobrança digital",
+        "description": (
+            "Orquestração através de Airflow de uma solução do hackathon Pivotando o Desktop,"
+            " substituindo processo manual em Excel/VBA."
+        ),
+        "stack": [("b-violet", "PySpark"), ("b-green", "Airflow"), ("b-sky", "Spark SQL"), ("b-pink", "Arquitetura Medalhão")],
+        "link": None,
+    },
+    {
+        "title": "Dashboard de Atendimentos — Assistência Social",
+        "period": "2026 – Atual",
+        "context": "Prefeitura de Jacarezinho · uso interno",
+        "description": (
+            "Dashboard em Streamlit integrando dados do CadÚnico e Bolsa Família a partir de "
+            "exportações de dados do Governo Federal. Monitoria, integridade e linhagem dos dados."
+        ),
+        "stack": [("b-sky", "DuckDB"), ("b-violet", "Pandas"), ("b-amber", "Streamlit"), ("b-pink", "Dados Públicos")],
+        "link": None,
+    },
+]
+
+
+def render_project_card(p: dict) -> str:
+    badges = "".join(f'<span class="badge {cls}">{label}</span>' for cls, label in p["stack"])
+    link_html = ""
+    if p.get("link"):
+        link_html = f'<a class="tl-link" href="{p["link"]}" target="_blank">⌥ {p["link"].replace("https://", "")} ↗</a>'
+
+    return f"""
+    <div class="tl-card">
+      <div class="tl-top">
+        <div class="tl-title">{p['title']}</div>
+        <div class="tl-period">{p['period']}</div>
+      </div>
+      <div class="tl-company">{p['context']}</div>
+      <div class="tl-desc">{p['description']}</div>
+      <div class="badge-row">{badges}</div>
+      {link_html}
+    </div>
+    """
 
 
 def get_avatar_html() -> str:
@@ -79,14 +154,14 @@ st.markdown("""
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #6c74e8;
+    color: #8a91a8;
     margin-bottom: 0.6rem;
   }
   .hero-name {
     font-family: 'DM Sans', sans-serif;
     font-size: 2.7rem;
     font-weight: 600;
-    color: #f0f2f8;
+    color: #6c74e8;
     line-height: 1.1;
     margin: 0 0 0.4rem 0;
   }
@@ -95,7 +170,7 @@ st.markdown("""
     font-family: 'DM Sans', sans-serif;
     font-size: 1.05rem;
     font-weight: 300;
-    color: #8a91a8;
+    color: #6c74e8;
     margin-bottom: 1.4rem;
   }
   .hero-links {
@@ -352,8 +427,18 @@ st.markdown(f"""
     <div class="hero-links">
       <a class="hero-link" href="mailto:gusaugusto@outlook.com">✉ gusaugusto@outlook.com</a>
       <a class="hero-link" href="tel:+5514998207736">☎ (14) 99820-7736</a>
-      <a class="hero-link" href="https://www.linkedin.com/in/gustavoapiccinini" target="_blank">↗ linkedin.com/in/gustavoapiccinini</a>
-      <a class="hero-link" href="https://github.com/GustavoPiccinini" target="_blank">⌥ github.com/GustavoPiccinini</a>
+      <a class="hero-link" href="https://www.linkedin.com/in/gustavoapiccinini" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667h-3.554v-11.452h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zm-15.117-13.019c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019h-3.564v-11.452h3.564v11.452zm16.545-20.452h-20.454c-.979 0-1.771.774-1.771 1.729v20.542c0 .956.792 1.729 1.771 1.729h20.451c.978 0 1.778-.773 1.778-1.729v-20.542c0-.955-.8-1.729-1.778-1.729z"/></svg>
+        LinkedIn
+      </a>
+      <a class="hero-link" href="https://github.com/GustavoPiccinini" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a class="hero-link" href="https://github.com/GustavoPiccinini/oracle-certificados" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        Certificados
+      </a>
     </div>
   </div>
 </div>
@@ -368,22 +453,6 @@ if RESUME_PDF_PATH.exists():
             mime="application/pdf",
         )
 
-
-# ── KPI CARDS ───────────────────────────────────────────────────────────────
-st.markdown("""
-<div class="kpi-row" style="grid-template-columns: repeat(2, 1fr);">
-  <div class="kpi-card">
-    <div class="kpi-value">4</div>
-    <div class="kpi-label">Projetos</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-value">3</div>
-    <div class="kpi-label">Domínios: Engenharia de Dados · AWS · OCI · GCP · Spark · PySpark·</div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
-
 # ── LAYOUT PRINCIPAL ─────────────────────────────────────────────────────────
 col_main, col_side = st.columns([3, 2], gap="large")
 
@@ -392,87 +461,33 @@ with col_main:
     # ABOUT
     st.markdown("""
     <div class="sec-header">
-      <span class="sec-mono">about</span>
+      <span class="sec-mono">Sobre</span>
       <div class="sec-line"></div>
     </div>
     <div class="about-box">
-      Profissional de dados em formação Full Stack em Dados e Analytics, com atuação prática em Engenharia,
-      de Dados. Tenho vivência com arquitetura medalhão (Bronze, Silver, Gold) em PySpark e Airflow,Data Lakes na AWS, GCP e OCI, e SQL avançado.
+      Profissional de dados em formação Full Stack em Dados e Analytics na PoD Academy, com atuação prática em Engenharia,
+      de Dados. Tenho vivência com arquitetura medalhão (Bronze, Silver, Gold) em PySpark e Airflow,Data Lakes na AWS, GCP e OCI, e SQL.
       Atualmente desenvolvo e mantenho um dashboard de gestão no setor assistência social (CadÚnico/Bolsa Família) usando DuckDB, Pandas e Streamlit.
-      Atuando na área financeira, possuo uma visão de negócio aplicada à resolução de problemas como inadimplência e risco de crédito.
+      Atuação na área financeira, permitiu uma visão de negócio aplicada à resolução de problemas como inadimplência e risco de crédito.
     </div>
     """, unsafe_allow_html=True)
 
     # PROJETOS
     st.markdown("""
     <div class="sec-header">
-      <span class="sec-mono">projects</span>
+      <span class="sec-mono">Projetos</span>
       <div class="sec-line"></div>
     </div>
-
-    <div class="tl-card">
-      <div class="tl-top">
-        <div class="tl-title">Data Lake PoD Cartões</div>
-        <div class="tl-period">2026</div>
-      </div>
-      <div class="tl-company">Portfólio pessoal</div>
-      <div class="tl-desc">
-        Data Lake completo na AWS (Raw, Trusted, Refined). Processamento com PySpark, Parquet particionado no S3 e Book de
-        Variáveis (U1M/U3M/U6M/U12M) para análise de inadimplência. Dashboard em Streamlit
-        com DuckDB como engine de consulta.
-      </div>
-      <div class="badge-row">
-        <span class="badge b-violet">PySpark</span>
-        <span class="badge b-green">AWS S3</span>
-        <span class="badge b-sky">DuckDB</span>
-        <span class="badge b-amber">Streamlit</span>
-      </div>
-      <a class="tl-link" href="https://github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes" target="_blank">⌥ github.com/GustavoPiccinini/Data_Lake_PoD_Cartoes ↗</a>
-    </div>
-    
-    <div class="tl-card">
-      <div class="tl-top">
-        <div class="tl-title">Pivotando o Desktop 4C Digital</div>
-        <div class="tl-period">2026</div>
-      </div>
-      <div class="tl-company">Fintech de cobrança digital</div>
-      <div class="tl-desc">
-        Pipeline de dados de um DataLake com arquitetura medalhão (Bronze/Silver/Gold) em PySpark e
-        Airflow, substituindo processo manual em Excel/VBA.
-      </div>
-      <div class="badge-row">
-        <span class="badge b-violet">PySpark</span>
-        <span class="badge b-green">Airflow</span>
-        <span class="badge b-sky">Spark SQL</span>
-        <span class="badge b-pink">Arquitetura Medalhão</span>
-      </div>
-    </div>            
-
-    <div class="tl-card">
-      <div class="tl-top">
-        <div class="tl-title">Dashboard de Atendimentos — Assistência Social</div>
-        <div class="tl-period">2026 – Atual</div>
-      </div>
-      <div class="tl-company">Prefeitura de Jacarezinho · uso interno</div>
-      <div class="tl-desc">
-        Dashboard em Streamlit integrando dados do CadÚnico e Bolsa Família a partir de
-        exportações de dados do Governo Federal. Monitoria, integridade e linhagem, dos dados.
-      </div>
-      <div class="badge-row">
-        <span class="badge b-sky">DuckDB</span>
-        <span class="badge b-violet">Pandas</span>
-        <span class="badge b-amber">Streamlit</span>
-        <span class="badge b-pink">Dados Públicos</span>
-      </div>
-    </div>
     """, unsafe_allow_html=True)
+
+    st.markdown("".join(render_project_card(p) for p in PROJECTS), unsafe_allow_html=True)
 
 with col_side:
 
     # STACK
     st.markdown("""
     <div class="sec-header">
-      <span class="sec-mono">tech stack</span>
+      <span class="sec-mono">Linguagens e Habilidades</span>
       <div class="sec-line"></div>
     </div>
     <div class="skill-grid">
@@ -556,10 +571,10 @@ with col_side:
         <div class="tl-title">Engenheiro de Dados — Hackathon 4C Digital</div>
         <div class="tl-period">2026</div>
       </div>
-      <div class="tl-company">Empresa de Cobrança Digital</div>
+      <div class="tl-company">Fintech de Cobrança Digital</div>
       <div class="tl-desc">
         Pipeline com arquitetura medalhão (Bronze/Silver/Gold) usando PySpark e Airflow,
-        substituindo processo manual em Excel/VBA. Orquestração de DAGs de ponta a ponta.
+        substituindo processo defasado e manual.Orquestração de DAGs de ponta a ponta.
       </div>
       <div class="badge-row">
         <span class="badge b-violet">PySpark</span>
@@ -612,7 +627,7 @@ with col_side:
     <div class="mini-card">
       <div class="mini-title">Full Stack em Dados e Analytics</div>
       <div class="mini-sub">PoD Academy · 2026</div>
-      <div class="mini-desc">Formação completa cobrindo engenharia de dados, analytics e IA.</div>
+      <div class="mini-desc">Formação completa cobrindo Engenharia de dados, Análise, Ciência de Dados e IA.</div>
     </div>
 
     <div class="mini-card">
