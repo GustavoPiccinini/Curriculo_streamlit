@@ -1,0 +1,15 @@
+name: keep-streamlit-awake
+
+on:
+  schedule:
+    # a cada 8 horas — bem abaixo do limite de 12h de inatividade do Streamlit Cloud
+    - cron: "0 */8 * * *"
+  workflow_dispatch: {}   # permite rodar manualmente pelo GitHub também
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Visitar o app pra resetar o contador de inatividade
+        run: |
+          curl -sS -o /dev/null -w "HTTP %{http_code}\n" "https://gustavo-curriculo.streamlit.app/"
