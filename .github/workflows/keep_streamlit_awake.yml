@@ -2,7 +2,7 @@ name: keep-streamlit-awake
 
 on:
   schedule:
-    # a cada 8 horas
+    # A cada 8 horas
     - cron: "0 */8 * * *"
   workflow_dispatch:
 
@@ -13,9 +13,10 @@ jobs:
     steps:
       - name: Ping Streamlit
         run: |
-          curl -L \
+          curl \
             -A "Mozilla/5.0" \
+            --max-redirs 5 \
             -sS \
             -o /dev/null \
             -w "HTTP %{http_code}\n" \
-            "https://gustavo-curriculo.streamlit.app/"
+            "https://gustavo-curriculo.streamlit.app/" || true
